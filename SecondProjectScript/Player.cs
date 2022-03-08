@@ -142,6 +142,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator DieProcess()
     {
+        hp = 0;
         isAlive = false;
         foreach (GameObject enemy in attackableQueue)
         {
@@ -161,7 +162,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             time -= Time.deltaTime;
-            UIManager.instance.clockRevival.text = "ÇÃ·¹ÀÌ¾î Àç¹èÄ¡±îÁö: " + time.ToString("00") + "ÃÊ";
+            UIManager.instance.clockRevival.text = "Ã‡ÃƒÂ·Â¹Ã€ÃŒÂ¾Ã® Ã€Ã§Â¹Ã¨Ã„Â¡Â±Ã®ÃÃ¶: " + time.ToString("00") + "ÃƒÃŠ";
             if (time <= 0)
             {
                 UIManager.instance.clockRevival.gameObject.SetActive(false);
