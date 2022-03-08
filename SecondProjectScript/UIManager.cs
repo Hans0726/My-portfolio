@@ -56,14 +56,15 @@ public class UIManager : MonoBehaviour
 
         if (isActive == false)
         {
+            GameManager.instance.startPlace = false;
             placeImage.SetActive(true);
-            placeText.text = "¹èÄ¡Á¾·á";
+            placeText.text = "ë°°ì¹˜ì¢…ë£Œ";
         }
 
         if (isActive == true)
         {
             placeImage.SetActive(false);
-            placeText.text = "¹èÄ¡ÇÏ±â";
+            placeText.text = "ë°°ì¹˜í•˜ê¸°";
         }
     }
     public IEnumerator StageStart(float time)
@@ -129,7 +130,7 @@ public class UIManager : MonoBehaviour
 
     public void SetPlayerStatusTexts(PlayerStatus player)
     {
-        // text ³»¿ëÀº UI¿ÀºêÁ§Æ®¸íÀÎ Text_º¯¼ö¸í¿¡¼­ Substring ÇÔ¼ö·Î ¸®ÅÏµÈ º¯¼ö¸íÀ¸·Î PlayerStatus ½ºÅ©¸³Æ®¿¡ Á¢±ÙÇÏ¿© ±× °ªÀ» ÇÒ´ç(¸®ÇÃ·º¼Ç)
+        // text ë‚´ìš©ì€ UIì˜¤ë¸Œì íŠ¸ëª…ì¸ Text_ë³€ìˆ˜ëª…ì—ì„œ Substring í•¨ìˆ˜ë¡œ ë¦¬í„´ëœ ë³€ìˆ˜ëª…ìœ¼ë¡œ PlayerStatus ìŠ¤í¬ë¦½íŠ¸ì— ì ‘ê·¼í•˜ì—¬ ê·¸ ê°’ì„ í• ë‹¹(ë¦¬í”Œë ‰ì…˜)
         foreach (Text status in statusTexts)
         {
             string textObjectName = status.name.Substring(5);
@@ -144,13 +145,13 @@ public class UIManager : MonoBehaviour
                 case "attackSpeed":
                 case "expRate":
                 case "luck":
-                    status.text = inputText + " ¹è";
+                    status.text = inputText + " ë°°";
                     break;
                 case "skillPoints":
-                    status.text = "Æ÷ÀÎÆ®: " + inputText;
+                    status.text = "í¬ì¸íŠ¸: " + inputText;
                     break;
                 case "level":
-                    status.text = "·¹º§: " + inputText;
+                    status.text = "ë ˆë²¨: " + inputText;
                     break;
                 default:
                     status.text = inputText;
