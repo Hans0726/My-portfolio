@@ -62,10 +62,6 @@ public class GameManager : MonoBehaviour
         {
             playerDeckInfo[i] = new DeckInfo();
         }
-    }
-
-    void Start()
-    {
         playerPositionX = new List<float>();
     }
 
