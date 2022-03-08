@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public float stageReinforcement = 1.3f;
     public float expReinforcement = 1.5f;
 
-    // stage ¹Ù²ğ ¶§ ÃÊ±âÈ­µÇ´Â º¯¼öµé
+    // stage ë°”ë€” ë•Œ ì´ˆê¸°í™”ë˜ëŠ” ë³€ìˆ˜ë“¤
     public float spawnRate = 2f;
     public float snailRate = 1f;
     public float DemoralizingRate = 1f;
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public DeckInfo[] playerDeckInfo;
 
     [System.NonSerialized]
-    public float currentTime = 2f;
+    public float currentTime = 30f;
 
     void Awake()
     {
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 if (currentTime <= 0f)
                 {
                     spawnStart = false;
-                    currentTime = 2f;
+                    currentTime = 30f;
                 }
             }
             else
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.gatehpSlider.value = (float)gateHp / (float)gatehpMax;
         UIManager.instance.gatehpText.text = gateHp + " / " + gatehpMax;
         UIManager.instance.expSlider.value = status.currentExp / status.totalExp;
-        UIManager.instance.expText.text = "°æÇèÄ¡: " + status.currentExp.ToString("N2") + " / " + status.totalExp.ToString("N2");
+        UIManager.instance.expText.text = "ê²½í—˜ì¹˜: " + status.currentExp.ToString("N2") + " / " + status.totalExp.ToString("N2");
         UIManager.instance.rankProbability[0].text = status.rankProbability[0].ToString("N0") + "%";
         UIManager.instance.rankProbability[1].text = status.rankProbability[1].ToString("N0") + "%";
         UIManager.instance.rankProbability[2].text = status.rankProbability[2].ToString("N0") + "%";
@@ -320,19 +320,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             playerDeckInfo[i].cardInfoList.Sort(); 
-            playerDeckInfo[i].cardInfoList.Reverse();  // ¼±ÅÃµÈ id ³»¸²Â÷¼ø Á¤·ÄÇÏ¿© listÀÇ ³¡ºÎÅÍ »èÁ¦µÇµµ·ÏÇÔ
+            playerDeckInfo[i].cardInfoList.Reverse();  // ì„ íƒëœ id ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬í•˜ì—¬ listì˜ ëë¶€í„° ì‚­ì œë˜ë„ë¡í•¨
             if (playerDeckInfo[i].cardInfoList.Count > 0)
             {
-                if (i == 0) // ºê·ĞÁî µ¦ Á¤º¸
-                    for (int j = 0; j < playerDeckInfo[i].cardInfoList.Count; j++)  // i¹øÂ° µ¦ÀÇ ¿ä¼ÒµéÀº Á¦°ÅµÈ Ä«µåÀÇ id·Î ±¸¼ºµÅ ÀÖÀ½
+                if (i == 0) // ë¸Œë¡ ì¦ˆ ë± ì •ë³´
+                    for (int j = 0; j < playerDeckInfo[i].cardInfoList.Count; j++)  // ië²ˆì§¸ ë±ì˜ ìš”ì†Œë“¤ì€ ì œê±°ëœ ì¹´ë“œì˜ idë¡œ êµ¬ì„±ë¼ ìˆìŒ
                         decks.deckBronze.cardList.RemoveAt(playerDeckInfo[i].cardInfoList[j]);
-                else if (i == 1)    // ½Ç¹ö µ¦ Á¤º¸
+                else if (i == 1)    // ì‹¤ë²„ ë± ì •ë³´
                     for (int j = 0; j < playerDeckInfo[i].cardInfoList.Count; j++)
                         decks.deckSilver.cardList.RemoveAt(playerDeckInfo[i].cardInfoList[j]);
-                else if (i == 2)    // °ñµå µ¦ Á¤º¸
+                else if (i == 2)    // ê³¨ë“œ ë± ì •ë³´
                     for (int j = 0; j < playerDeckInfo[i].cardInfoList.Count; j++)
                         decks.deckGold.cardList.RemoveAt(playerDeckInfo[i].cardInfoList[j]);
-                else              // ÇÃ·¹Æ¼³Ñ µ¦ Á¤º¸
+                else              // í”Œë ˆí‹°ë„˜ ë± ì •ë³´
                     for (int j = 0; j < playerDeckInfo[i].cardInfoList.Count; j++)
                         decks.deckPlatinum.cardList.RemoveAt(playerDeckInfo[i].cardInfoList[j]);
             }
