@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public DeckInfo[] playerDeckInfo;
 
     [System.NonSerialized]
-    public float currentTime = 2f;
+    public float currentTime = 30f;
 
     void Awake()
     {
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 if (currentTime <= 0f)
                 {
                     spawnStart = false;
-                    currentTime = 2f;
+                    currentTime = 30f;
                 }
             }
             else
@@ -154,12 +154,6 @@ public class GameManager : MonoBehaviour
             else
                 bossStage = false;
 
-            if (bossStage == true)
-            {
-                SoundManager.instance.audioSourceBGM.clip = SoundManager.instance.boss;
-            }
-            else
-                SoundManager.instance.audioSourceBGM.clip = SoundManager.instance.dungeon;
 
             SaveLoadSystem.SaveSystem(status, playerDeckInfo);
             CalculateRankProbability(status.rankProbability);

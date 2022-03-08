@@ -21,7 +21,11 @@ public class EnemySpawn : MonoBehaviour
     restart:
         int stage = GameManager.instance.stage % 5;
         if (GameManager.instance.stage % 5 == 4)    // 미리 오브젝트를 생성하기 위해 해당 스테이지의 이 전 스테이지를 기준으로 에네미 오브젝트의 수를 정함
+        {
             numEnemies = 1;
+            SoundManager.instance.audioSourceBGM.clip = SoundManager.instance.boss;
+            SoundManager.instance.audioSourceBGM.Play();
+        }
         else
             numEnemies = 20;
 
@@ -37,18 +41,11 @@ public class EnemySpawn : MonoBehaviour
             }
         }
 
-
         for (int i = 0; i < numEnemies; i++)
         {
             GameObject enemy = Instantiate(enemyObjects[stage], spawnPoint);
             enemyObjectPool.Add(enemy);
             enemy.SetActive(false);
-            if (GameManager.instance.bossStage == true)
-            {
-                SoundManager.instance.audioSourceBGM.clip = SoundManager.instance.boss;
-                SoundManager.instance.audioSourceBGM.Play();
-                break;
-            }
         }
 
         yield return new WaitUntil(() => GameManager.instance.stageStart == true);
@@ -77,6 +74,12 @@ public class EnemySpawn : MonoBehaviour
                         enemyObjectPool.Remove(enemy);
                         Destroy(enemy);
                     }
+                    if (GameManager.instance.bossStage == true)
+                    {
+                        SoundManager.instance.audioSourceBGM.clip = SoundManager.instance.dungeon;
+                        SoundManager.instance.audioSourceBGM.Play();
+                    }
+                        
                     GameManager.instance.stageStart = false;
                     goto restart;
                 }
