@@ -268,12 +268,10 @@ public class GameManager : MonoBehaviour
         if (stageStart)
             return;
 
-
         GameObject clone = GameObject.FindGameObjectWithTag("Player");
 
         if (clone != null)
            Destroy(clone);
-
 
         SaveData data = SaveLoadSystem.LoadSystem();
         if (data == null)
@@ -281,7 +279,8 @@ public class GameManager : MonoBehaviour
         stage = data.stage;
         if (stage % 5 == 0)
             bossStage = true;
-        placeableNum = data.placeableNum;
+        gateHp          = data.gateHp;
+        placeableNum    = data.placeableNum;
         playerPositionX = data.playerPositionX;
 
         status.hpMax            = data.hpMax;
@@ -332,10 +331,11 @@ public class GameManager : MonoBehaviour
 
         UIManager.instance.SetPlayerStatusTexts(status);;
         UIManager.instance.buttonImage.SetActive(true);
-        StopCoroutine(FindObjectOfType<EnemySpawn>().SpawnProcess());
+
+        FindObjectOfType<EnemySpawn>().StopAllCoroutines();
         StartCoroutine(FindObjectOfType<EnemySpawn>().SpawnProcess());
 
-        StopCoroutine(UIManager.instance.StageStart(currentTime));
+        UIManager.instance.StopCoroutine(UIManager.instance.StageStart(currentTime));
         StartCoroutine(UIManager.instance.StageStart(currentTime));
 
         int count = playerPositionX.Count;

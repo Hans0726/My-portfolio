@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
 
         if (isActive == false)
         {
+            GameManager.instance.startPlace = false;
             placeImage.SetActive(true);
             placeText.text = "배치종료";
         }
@@ -69,6 +70,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator StageStart(float time)
     {
         int checkStage = GameManager.instance.stage;
+
     restart:
         yield return new WaitUntil(() => GameManager.instance.stageStart && checkStage == GameManager.instance.stage);
         checkStage++;

@@ -27,9 +27,14 @@ public class EnemySpawn : MonoBehaviour
         else
             numEnemies = 20;
 
-        if (enemyObjectPool.Count > 0) // 로드 시 초기화
+        if (GameManager.instance.stage != 1 && GameManager.instance.stage % 5 == 1)    // 보스 직 후 스테이지(6,11,16..)
+            tempNumEnemies = 1;     // 지울 에너미 오브젝트 수
+        else
+            tempNumEnemies = 20;
+
+        if (enemyObjectPool.Count > 0)
         {
-            for (int i = 0; i < tempNumEnemies; i++)    // 새로운 스테이지 적 생성을 위한 기존 오브젝트 소멸과 오브젝트 풀 요소 제거
+            for (int i = 0; i < tempNumEnemies; i++)    // 새로운 스테이지 적 생성을 위한 이 전 오브젝트 소멸과 오브젝트 풀 요소 제거
             {
                 GameObject enemy = enemyObjectPool[0];
                 enemyObjectPool.Remove(enemy);
@@ -81,10 +86,11 @@ public class EnemySpawn : MonoBehaviour
                             SoundManager.instance.audioSourceBGM.Play();
                             break;
                         }
-                            
+
                     }
                     GameManager.instance.stageStart = false;
                     GameManager.instance.stage++;
+                    Debug.Log(GameManager.instance.stage);
                     if (GameManager.instance.stage % 5 == 0)
                         GameManager.instance.bossStage = true;
                     else

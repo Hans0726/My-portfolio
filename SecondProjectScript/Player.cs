@@ -142,6 +142,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator DieProcess()
     {
+        hp = 0;
         isAlive = false;
         foreach (GameObject enemy in attackableQueue)
         {
